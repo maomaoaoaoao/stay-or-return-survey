@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留or回 | 海外去留探索测试</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>留or回 | 海外去留探索测试</h1>
+            <p class="intro">"五维适应力模型"是<a href="https://github.com/maomaoaoaoao" target="_blank">maomaoaoaoao</a>基于社会认知职业理论（Lent, 1994, 2006）、Push-Pull迁移模型（Mazzarol, 2002）与文化适配研究（Berry, 1997）所构建的评估框架。通过33道题，系统量化个体在海外环境中的现实匹配、自我调节、心理归属、家庭因素及目标动机等关键维度，旨在为留学生或跨文化决策者提供有理论支撑的方向参考。</p>
+        </header>
+
+        <div class="quiz-container card">
+            <!-- 进度条 -->
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-bar"></div>
+            </div>
+            
+            <form id="quiz-form">
+                <div id="questions-container">
+                    <!-- 问题将由JavaScript动态生成 -->
+                </div>
+                
+                <div class="controls">
+                    <button type="button" id="prev-btn" class="btn btn-secondary btn-prev" disabled>
+                        <i class="ri-arrow-left-line icon"></i>上一题
+                    </button>
+                    <button type="button" id="next-btn" class="btn btn-primary">
+                        下一题<i class="ri-arrow-right-line icon"></i>
+                    </button>
+                    <button type="button" id="submit-btn" class="btn btn-primary" style="display: none;">
+                        查看结果<i class="ri-check-line icon"></i>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="results-container" class="card">
+            <div class="result-header">
+                <h2>你的测试结果</h2>
+                <div id="result-decision" class="result-decision"></div>
+                <p id="result-summary" class="result-summary"></p>
+            </div>
+            
+            <!-- 雷达图 -->
+            <div class="radar-chart-container">
+                <canvas id="radar-chart"></canvas>
+            </div>
+            
+            <!-- 维度分数卡片 -->
+            <div class="dimension-cards" id="dimension-scores">
+                <!-- 维度卡片将由JavaScript动态生成 -->
+            </div>
+            
+            <!-- 参考文献部分 -->
+            <div class="references-container">
+                <button type="button" class="references-toggle" aria-expanded="false" aria-controls="references-content">
+                    References <i class="ri-arrow-down-s-line icon"></i>
+                </button>
+                <div id="references-content" class="references-content">
+                    <ul class="references-list">
+                        <li>Lent, R. W., Brown, S. D., & Hackett, G. (1994). Toward a unifying social cognitive theory of career and academic interest, choice, and performance. Journal of Vocational Behavior, 45(1), 79–122. https://doi.org/10.1006/jvbe.1994.1027</li>
+                        <li>Lent, R. W., & Brown, S. D. (2006). On conceptualizing and assessing social cognitive constructs in career research: A measurement guide. Journal of Career Assessment, 14(1), 12–35. https://doi.org/10.1177/1069072705281364</li>
+                        <li>Lent, R. W., & Brown, S. D. (2013). Social cognitive model of career self-management: Toward a unifying view of adaptive career behavior across the life span. Journal of Counseling Psychology, 60(4), 557–568. https://doi.org/10.1037/a0033446</li>
+                        <li>Mazzarol, T., & Soutar, G. N. (2002). "Push–pull" factors influencing international student destination choice. International Journal of Educational Management, 16(2), 82–90. https://doi.org/10.1108/09513540210418403</li>
+                        <li>Wu, Y. (2020). Study abroad experience and career decision-making: A qualitative study of Chinese students. Frontiers of Education in China, 15(2), 313–331. https://doi.org/10.1007/s11516-020-0014-8</li>
+                        <li>Wu, H., Garza, E., & Guzman, N. (2015). International student's challenge and adjustment to college. Education Research International, 2015, Article ID 202753. https://doi.org/10.1155/2015/202753</li>
+                        <li>Savugathali, A. F., Mustafa, M. B., & Jusoh, A. J. (2025). Self-efficacy in career decision making and outcome expectation among final year students. International Journal of Academic Research in Business and Social Sciences, 15(1), 40–49. DOI:10.6007/IJARBSS/v15-i01/23624</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="restart-btn-container">
+                <button type="button" id="restart-btn" class="btn btn-primary">
+                    重新测试<i class="ri-refresh-line icon"></i>
+                </button>
+            </div>
+        </div>
+
+        <footer>
+            <p>本问卷结果仅供参考，结果不构成决策建议。请勿用于商业用途或未经授权的复制使用。</p>
+            <p class="copyright">本问卷由 <a href="https://github.com/maomaoaoaoao" target="_blank">maomaoaoaoao</a> 独立设计开发，内容为原创结构，严禁未经授权转载或商用。</p>
+        </footer>
+    </div>
+
+    <!-- Chart.js 用于绘制雷达图 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/quiz-data.js"></script>
+    <script src="js/quiz-app.js"></script>
+</body>
+</html> 
