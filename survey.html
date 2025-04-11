@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>留or回 | 海外去留探索测试 | Stay or Return | Overseas Decision Test</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <!-- 先加载数据和语言切换功能 -->
+    <script src="js/quiz-data.js"></script>
+    <script src="js/language-switch.js"></script>
+    <!-- 将语言切换函数添加到全局作用域 -->
+    <script>
+    // 确保语言切换函数可用于全局
+    window.toggleLanguageGlobal = function() {
+        console.log("全局语言切换函数被调用");
+        if (typeof toggleLanguage === 'function') {
+            toggleLanguage();
+        } else {
+            console.error("toggleLanguage 函数未定义，尝试重载页面");
+            location.reload();
+        }
+    };
+    </script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="page-title">
+                <span class="zh-title">留or回 | 海外去留探索测试</span>
+                <span class="en-title">Stay or Return | Overseas Decision Test</span>
+            </h1>
+            <p class="quiz-intro">
+                <span class="zh-intro">请根据你的真实想法和感受回答以下问题。答案没有对错之分，选择最符合你当前状态的选项即可。</span>
+                <span class="en-intro">Please answer the following questions based on your true thoughts and feelings. There are no right or wrong answers, just choose the option that best matches your current state.</span>
+            </p>
+        </header>
+
+        <!-- 问卷表单 -->
+        <div class="quiz-container">
+            <!-- 进度条 -->
+            <div class="progress-bar-container">
+                <div class="progress-bar-fill" id="progress-bar"></div>
+            </div>
+            
+            <form id="quiz-form">
+                <div id="questions-container">
+                    <!-- 问题将由JavaScript动态生成 -->
+                </div>
+                
+                <div class="controls">
+                    <button type="button" id="prev-btn" class="btn btn-secondary" disabled>
+                        <span class="icon">←</span>
+                        <span id="prev-btn-text">上一题 / Previous</span>
+                    </button>
+                    <button type="button" id="next-btn" class="btn btn-primary">
+                        <span id="next-btn-text">下一题 / Next</span>
+                        <span class="icon">→</span>
+                    </button>
+                    <button type="button" id="submit-btn" class="btn btn-primary" style="display: none;">
+                        <span id="submit-btn-text">提交 / Submit</span>
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <div id="results-container" style="display: none;">
+            <div class="result-header">
+                <h2>
+                    <span data-lang="zh">你的测试结果</span>
+                    <span data-lang="en">Your Results</span>
+                </h2>
+            </div>
+
+            <div id="result-decision" class="result-decision"></div>
+            <div id="result-summary" class="result-summary"></div>
+            
+            <!-- 雷达图 -->
+            <div class="radar-chart-container">
+                <canvas id="radar-chart"></canvas>
+            </div>
+            
+            <!-- 维度得分 -->
+            <div id="dimension-scores" class="dimension-scores"></div>
+            
+            <!-- 参考文献 -->
+            <div class="references-container">
+                <button type="button" class="references-toggle" id="references-toggle" aria-expanded="false">
+                    <span>
+                        <span class="btn-text-zh">查看参考文献</span>
+                        <span class="btn-text-en">View References</span>
+                    </span>
+                    <span class="icon">↓</span>
+                </button>
+                <div id="references-content" class="references-content" style="display: none;">
+                    <ul class="references-list">
+                        <li>Lent, R. W., & Brown, S. D. (2006). Integrating person and situation perspectives on work satisfaction: A social-cognitive view. <em>Journal of Vocational Behavior, 69</em>(2), 236–247. <a href="https://doi.org/10.1016/j.jvb.2006.02.006" target="_blank">https://doi.org/10.1016/j.jvb.2006.02.006</a></li>
+                        <li>Lent, R. W., & Brown, S. D. (2013). Social cognitive model of career self-management: Toward a unifying view of adaptive career behavior across the life span. <em>Journal of Counseling Psychology, 60</em>(4), 557–568. <a href="https://doi.org/10.1037/a0033446" target="_blank">https://doi.org/10.1037/a0033446</a></li>
+                        <li>Lent, R. W., Brown, S. D., & Hackett, G. (1994). Toward a unifying social cognitive theory of career and academic interest, choice, and performance. <em>Journal of Vocational Behavior, 45</em>(1), 79–122. <a href="https://doi.org/10.1006/jvbe.1994.1027" target="_blank">https://doi.org/10.1006/jvbe.1994.1027</a></li>
+                        <li>Mazzarol, T., & Soutar, G. N. (2002). "Push‐pull" factors influencing international student destination choice. <em>International Journal of Educational Management, 16</em>(2), 82–90. <a href="https://doi.org/10.1108/09513540210418403" target="_blank">https://doi.org/10.1108/09513540210418403</a></li>
+                        <li>Wu, Y. (2020). Study abroad experience and career decision-making: A qualitative study of Chinese students. <em>Frontiers of Education in China, 15</em>(2), 313–331. <a href="https://doi.org/10.1007/s11516-020-0014-8" target="_blank">https://doi.org/10.1007/s11516-020-0014-8</a></li>
+                        <li>Savugathali, A. F., Mustafa, M. B., & Jusoh, A. J. (2025). Self-efficacy in career decision making and outcome expectation among final year students. <em>International Journal of Academic Research in Business and Social Sciences, 15</em>(1), 40–42. <a href="https://doi.org/10.6007/IJARBSS/v15-i01/23624" target="_blank">https://doi.org/10.6007/IJARBSS/v15-i01/23624</a></li>
+                        <li>Geeraert, N., Ward, C., & Hanel, P. H. P. (2022). Returning home: The role of expectations in re‐entry adaptation. <em>Applied Psychology: Health and Well-Being, 14</em>(3), 949–966. <a href="https://doi.org/10.1111/aphw.12361" target="_blank">https://doi.org/10.1111/aphw.12361</a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="results-actions">
+                <a href="index.html" class="results-report-link">
+                    <span data-lang="zh">重新开始</span>
+                    <span data-lang="en">Restart</span> →
+                </a>
+                <button id="restart-btn" class="btn btn-primary">
+                    <span data-lang="zh">重新测试</span>
+                    <span data-lang="en">Take Again</span>
+                </button>
+            </div>
+        </div>
+
+        <footer class="footer">
+            <div class="disclaimer">
+                <span class="zh-disclaimer">本测试结果仅供参考，结果不构成决策建议。请勿用于商业用途或未经授权的复制使用。</span>
+                <span class="en-disclaimer">This test is for reference only and does not constitute decision advice. Not for commercial use or unauthorized reproduction.</span>
+            </div>
+            <div class="copyright">
+                <span data-lang="zh">本问卷由 <a href="https://github.com/maomaoaoaoao">maomaoaoaoao</a> 独立设计开发，内容为原创结构，严禁未经授权转载使用。</span>
+                <span data-lang="en">Designed and developed by <a href="https://github.com/maomaoaoaoao">maomaoaoaoao</a>. Original content structure, unauthorized reproduction prohibited.</span>
+            </div>
+        </footer>
+    </div>
+
+    <!-- 加载应用逻辑和依赖 -->
+    <script src="js/quiz-app.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</body>
+</html> 

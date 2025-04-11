@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Report | 海外去留探索测试</title>
+    <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
+    <link href="css/style.css" rel="stylesheet">
+    <style>
+        .report-page {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 60px 20px;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+        }
+
+        .construction-icon {
+            font-size: 4rem;
+            color: var(--primary);
+            margin-bottom: 2rem;
+            animation: pulse 2s infinite;
+        }
+
+        .construction-title {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-dark);
+            margin-bottom: 1rem;
+        }
+
+        .construction-text {
+            font-size: 1.1rem;
+            color: var(--dark-gray);
+            line-height: 1.6;
+            max-width: 600px;
+            margin-bottom: 2rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 12px 24px;
+            background: var(--primary-light);
+            color: var(--primary-dark);
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .back-btn:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <button class="language-switch" onclick="toggleLanguage()">
+        <i class="ri-translate-2-line icon"></i>
+        <span data-lang="zh">EN</span>
+        <span data-lang="en">中文</span>
+    </button>
+
+    <div class="report-page">
+        <i class="ri-tools-fill construction-icon"></i>
+        <h1 class="construction-title">
+            <span data-lang="zh">Report 正在施工中</span>
+            <span data-lang="en">Report Under Construction</span>
+        </h1>
+        <p class="construction-text">
+            <span data-lang="zh">
+                我正在努力完善这份研究报告。还没有写完…
+                敬请期待！
+            </span>
+            <span data-lang="en">
+                We are working hard to complete this research report to provide you with more in-depth analysis and insights.
+                Stay tuned!
+            </span>
+        </p>
+        <a href="index.html" class="back-btn">
+            <i class="ri-arrow-left-line"></i>
+            <span data-lang="zh">返回首页</span>
+            <span data-lang="en">Back to Home</span>
+        </a>
+    </div>
+
+    <script src="js/language-switch.js"></script>
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const savedLanguage = localStorage.getItem('quizLanguage');
+        if (savedLanguage) {
+            currentLang = savedLanguage;
+            if (currentLang === 'en') {
+                document.body.classList.add('lang-en');
+            }
+            updatePageLanguage();
+        }
+    });
+    </script>
+</body>
+</html> 
