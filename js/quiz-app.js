@@ -7,6 +7,12 @@ document.addEventListener('DOMContentLoaded', function() {
         return;
     }
     
+    // 确保 dimensionExplanationsEN 存在
+    if (typeof dimensionExplanationsEN === 'undefined') {
+        console.error('错误：找不到英文维度解释数据！请检查 quiz-data.js 是否正确加载');
+        return;
+    }
+    
     // 获取当前语言设置
     let currentLang = localStorage.getItem('quizLanguage') || 'zh';
     
@@ -687,15 +693,22 @@ document.addEventListener('DOMContentLoaded', function() {
      * 获取维度解释
      */
     function getDimensionExplanation(dimension, score) {
-        let level;
-        if (score >= 4) {
-            level = translations[currentLang].dimensions[dimension].levels.high;
-        } else if (score >= 2.5) {
-            level = translations[currentLang].dimensions[dimension].levels.medium;
-        } else {
-            level = translations[currentLang].dimensions[dimension].levels.low;
+        // 计算标准化得分(0-100)
+        const standardizedScore = ((score + 2) / 4) * 100;
+        
+        // 根据当前语言选择对应的维度解释对象
+        const dimensionExplanationsObj = currentLang === 'zh' ? dimensionExplanations : dimensionExplanationsEN;
+        
+        // 在对应语言的维度解释对象中查找匹配的分数区间
+        const levels = dimensionExplanationsObj[dimension].levels;
+        for (const level of levels) {
+            if (standardizedScore >= level.range[0] && standardizedScore <= level.range[1]) {
+                return level.text;
+            }
         }
-        return level.text;
+        
+        // 如果没有找到匹配的区间（极少情况），返回空字符串
+        return "";
     }
     
     /**
@@ -757,18 +770,20 @@ document.addEventListener('DOMContentLoaded', function() {
         const subtitle = document.createElement('div');
         subtitle.className = 'dimension-subtitle';
         
-        if (score >= 1) {
-            subtitle.textContent = currentLang === 'zh' ? 
-                translations.zh.dimensions[dimension].levels.high.title || '优势领域' : 
-                translations.en.dimensions[dimension].levels.high.title || 'Strong Area';
-        } else if (score >= -0.5) {
-            subtitle.textContent = currentLang === 'zh' ? 
-                translations.zh.dimensions[dimension].levels.medium.title || '中等表现' : 
-                translations.en.dimensions[dimension].levels.medium.title || 'Moderate Performance';
+        // 计算标准化得分(0-100)
+        const standardizedScore = ((score + 2) / 4) * 100;
+        
+        // 使用5个区间划分显示副标题
+        if (standardizedScore >= 83) {
+            subtitle.textContent = currentLang === 'zh' ? '高度优势' : 'Strong Fit';
+        } else if (standardizedScore >= 65) {
+            subtitle.textContent = currentLang === 'zh' ? '具备优势' : 'Moderate Fit with Strengths';
+        } else if (standardizedScore >= 50) {
+            subtitle.textContent = currentLang === 'zh' ? '平衡探索中' : 'Balanced but Uncertain';
+        } else if (standardizedScore >= 30) {
+            subtitle.textContent = currentLang === 'zh' ? '不够匹配' : 'Some Misalignment';
         } else {
-            subtitle.textContent = currentLang === 'zh' ? 
-                translations.zh.dimensions[dimension].levels.low.title || '需要关注' : 
-                translations.en.dimensions[dimension].levels.low.title || 'Needs Attention';
+            subtitle.textContent = currentLang === 'zh' ? '适配度较低' : 'Low Fit';
         }
         
         card.appendChild(subtitle);
