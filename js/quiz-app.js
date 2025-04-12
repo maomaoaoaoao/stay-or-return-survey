@@ -700,14 +700,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const dimensionExplanationsObj = currentLang === 'zh' ? dimensionExplanations : dimensionExplanationsEN;
         
         // 在对应语言的维度解释对象中查找匹配的分数区间
-        const levels = dimensionExplanationsObj[dimension].levels;
-        for (const level of levels) {
-            if (standardizedScore >= level.range[0] && standardizedScore <= level.range[1]) {
-                return level.text;
+        if (dimensionExplanationsObj && dimensionExplanationsObj[dimension] && dimensionExplanationsObj[dimension].levels) {
+            const levels = dimensionExplanationsObj[dimension].levels;
+            for (const level of levels) {
+                if (standardizedScore >= level.range[0] && standardizedScore <= level.range[1]) {
+                    return level.text;
+                }
             }
         }
         
-        // 如果没有找到匹配的区间（极少情况），返回空字符串
+        // 如果没有找到匹配的区间，输出一个控制台日志并返回空字符串
+        console.log(`无法找到维度 ${dimension} 在分数 ${standardizedScore} 的解释文本`);
         return "";
     }
     
@@ -791,7 +794,35 @@ document.addEventListener('DOMContentLoaded', function() {
         // 添加维度说明
         const explanation = document.createElement('div');
         explanation.className = 'dimension-explanation';
-        explanation.textContent = getDimensionExplanation(dimension, score);
+        
+        let explanationText = '';
+        
+        // 对D3维度在低分区间进行特殊处理
+        if (dimension === 'D3' && standardizedScore < 30) {
+            // 直接从dimensionExplanations中获取文本
+            const dimensionExplanationsObj = currentLang === 'zh' ? dimensionExplanations : dimensionExplanationsEN;
+            if (dimensionExplanationsObj && 
+                dimensionExplanationsObj.D3 && 
+                dimensionExplanationsObj.D3.levels) {
+                // 获取D3维度[0, 29]区间的解释
+                const lowestLevel = dimensionExplanationsObj.D3.levels.find(level => 
+                    level.range[0] === 0 && level.range[1] === 29);
+                if (lowestLevel && lowestLevel.text) {
+                    explanationText = lowestLevel.text;
+                    console.log('为D3低分区间找到了直接文本:', explanationText);
+                }
+            }
+        }
+        
+        // 如果没有通过特殊处理获取到文本，则使用常规方法
+        if (!explanationText) {
+            explanationText = getDimensionExplanation(dimension, score);
+        }
+        
+        // 记录日志，帮助调试
+        console.log(`维度 ${dimension}，分数 ${score}，标准化分数 ${standardizedScore}，解释文本:`, explanationText);
+        
+        explanation.textContent = explanationText || "未找到对应解释文本，请联系管理员。";
         card.appendChild(explanation);
         
         return card;
