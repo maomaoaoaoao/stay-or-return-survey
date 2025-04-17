@@ -460,14 +460,17 @@ document.addEventListener('DOMContentLoaded', function() {
      * 计算最终加权得分
      */
     function calculateFinalScore(dimensionStandardizedScores) {
-        // 先将原始评分从[-2, 2]映射到[0, 100]
-        // 然后应用权重计算最终得分
+        // 基本线性加权计算
         const weightedScore = 
             dimensionWeights.D1 * dimensionStandardizedScores.D1 +
             dimensionWeights.D2 * dimensionStandardizedScores.D2 +
             dimensionWeights.D3 * dimensionStandardizedScores.D3 +
             dimensionWeights.D4 * dimensionStandardizedScores.D4 +
             dimensionWeights.D5 * dimensionStandardizedScores.D5;
+        
+        // 记录分数计算过程，便于调试
+        console.log('维度分数:', dimensionStandardizedScores);
+        console.log('最终加权得分:', weightedScore);
         
         return weightedScore;
     }
