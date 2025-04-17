@@ -3,112 +3,667 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Report | 海外去留探索测试</title>
+    <title>Research Report | 海外去留探索测试</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@3.5.0/fonts/remixicon.css" rel="stylesheet">
     <link href="css/style.css" rel="stylesheet">
     <style>
+        /* Report页面特定样式 */
         .report-page {
-            max-width: 800px;
+            max-width: 1120px;
             margin: 0 auto;
-            padding: 60px 20px;
+            padding: 40px 20px 80px;
             min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
+        }
+        
+        .report-header {
             text-align: center;
+            margin-bottom: 50px;
+            padding-top: 30px;
         }
-
-        .construction-icon {
-            font-size: 4rem;
-            color: var(--primary);
-            margin-bottom: 2rem;
-            animation: pulse 2s infinite;
-        }
-
-        .construction-title {
-            font-size: 2rem;
+        
+        .report-title {
+            font-size: 2.2rem;
             font-weight: 700;
-            color: var(--primary-dark);
-            margin-bottom: 1rem;
+            margin-bottom: 15px;
+            background: linear-gradient(to right, var(--primary-dark), var(--secondary-dark));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
         }
-
-        .construction-text {
+        
+        .report-subtitle {
             font-size: 1.1rem;
             color: var(--dark-gray);
-            line-height: 1.6;
-            max-width: 600px;
-            margin-bottom: 2rem;
+            margin-bottom: 30px;
         }
-
-        .back-btn {
-            display: inline-flex;
+        
+        .report-container {
+            display: flex;
+            gap: 30px;
+        }
+        
+        .report-sidebar {
+            flex: 0 0 300px;
+        }
+        
+        .report-content {
+            flex: 1;
+        }
+        
+        /* 更新日志部分 */
+        .changelog-card {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 25px;
+            margin-bottom: 25px;
+            position: relative;
+        }
+        
+        .changelog-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+            display: flex;
             align-items: center;
-            gap: 0.5rem;
-            padding: 12px 24px;
-            background: var(--primary-light);
+            gap: 10px;
+        }
+        
+        .changelog-date {
+            font-size: 0.85rem;
+            color: var(--dark-gray);
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .changelog-list {
+            list-style-type: none;
+            margin-bottom: 10px;
+        }
+        
+        .changelog-list li {
+            margin-bottom: 12px;
+            position: relative;
+            padding-left: 24px;
+            line-height: 1.5;
+        }
+        
+        .changelog-list li:before {
+            content: "•";
+            position: absolute;
+            left: 8px;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        /* 研究报告部分 */
+        .research-card {
+            background-color: var(--white);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+            padding: 35px;
+            margin-bottom: 30px;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: var(--primary-dark);
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary-light);
+        }
+        
+        .subsection-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin: 30px 0 15px;
+            color: var(--secondary-dark);
+        }
+        
+        .research-text {
+            font-size: 1rem;
+            line-height: 1.7;
+            margin-bottom: 20px;
+            color: var(--black);
+        }
+        
+        .reference-link {
             color: var(--primary-dark);
             text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: all 0.3s ease;
+            border-bottom: 1px dashed var(--primary);
+            transition: all 0.2s ease;
         }
-
-        .back-btn:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
+        
+        .reference-link:hover {
+            color: var(--primary);
+            border-bottom: 1px solid var(--primary);
         }
-
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.1); }
-            100% { transform: scale(1); }
+        
+        .references-section {
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid var(--gray);
+        }
+        
+        .references-list {
+            list-style-type: none;
+            padding-left: 0;
+        }
+        
+        .references-list li {
+            margin-bottom: 15px;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            padding-left: 25px;
+            text-indent: -25px;
+        }
+        
+        /* 语言切换按钮调整 */
+        .lang-toggle-container {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            z-index: 100;
+        }
+        
+        /* 导航菜单 */
+        .report-nav {
+            position: sticky;
+            top: 30px;
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: 20px;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .report-nav-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: var(--primary-dark);
+        }
+        
+        .report-nav-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        .report-nav-list li {
+            margin-bottom: 10px;
+        }
+        
+        .report-nav-list a {
+            display: block;
+            padding: 8px 10px;
+            color: var(--dark-gray);
+            text-decoration: none;
+            font-size: 0.95rem;
+            border-radius: var(--radius-sm);
+            transition: all 0.2s ease;
+        }
+        
+        .report-nav-list a:hover,
+        .report-nav-list a.active {
+            background-color: var(--primary-light);
+            color: var(--primary-dark);
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 968px) {
+            .report-container {
+                flex-direction: column;
+            }
+            
+            .report-sidebar {
+                flex: 0 0 100%;
+            }
+            
+            .report-nav {
+                position: relative;
+                top: 0;
+                margin-bottom: 30px;
+            }
         }
     </style>
 </head>
 <body>
-    <button class="language-switch" onclick="toggleLanguage()">
-        <i class="ri-translate-2-line icon"></i>
-        <span data-lang="zh">EN</span>
-        <span data-lang="en">中文</span>
-    </button>
-
-    <div class="report-page">
-        <i class="ri-tools-fill construction-icon"></i>
-        <h1 class="construction-title">
-            <span data-lang="zh">Report 正在施工中</span>
-            <span data-lang="en">Report Under Construction</span>
-        </h1>
-        <p class="construction-text">
-            <span data-lang="zh">
-                我正在努力完善这份研究报告。还没有写完…
-                敬请期待！
-            </span>
-            <span data-lang="en">
-                We are working hard to complete this research report to provide you with more in-depth analysis and insights.
-                Stay tuned!
-            </span>
-        </p>
-        <a href="index.html" class="back-btn">
-            <i class="ri-arrow-left-line"></i>
-            <span data-lang="zh">返回首页</span>
-            <span data-lang="en">Back to Home</span>
-        </a>
+    <div class="lang-toggle-container">
+        <button class="language-switch" onclick="toggleLanguage()">
+            <i class="ri-translate-2-line icon"></i>
+            <span data-lang="zh">EN</span>
+            <span data-lang="en">中文</span>
+        </button>
     </div>
-
-    <script src="js/language-switch.js"></script>
+    
+    <div class="report-page">
+        <header class="report-header">
+            <h1 class="report-title">
+                <span data-lang="zh">海外去留测评研究报告</span>
+                <span data-lang="en">Overseas Stay-or-Return Assessment Research Report</span>
+            </h1>
+            <p class="report-subtitle">
+                <span data-lang="zh"></span>
+                <span data-lang="en"></span>
+            </p>
+        </header>
+        
+        <div class="report-container">
+            <!-- 左侧导航 -->
+            <div class="report-sidebar">
+                <div class="report-nav">
+                    <h3 class="report-nav-title">
+                        <span data-lang="zh">目录</span>
+                        <span data-lang="en">Contents</span>
+                    </h3>
+                    <ul class="report-nav-list">
+                        <li><a href="#updates" class="active">
+                            <span data-lang="zh">🛠️ 更新日志</span>
+                            <span data-lang="en">🛠️ Updates Log</span>
+                        </a></li>
+                        <li><a href="#future-updates">
+                            <span data-lang="zh">📈 后续更新方向</span>
+                            <span data-lang="en">📈 Future Updates</span>
+                        </a></li>
+                        <li><a href="#introduction">
+                            <span data-lang="zh">1. 简介</span>
+                            <span data-lang="en">1. Introduction</span>
+                        </a></li>
+                        <li><a href="#framework">
+                            <span data-lang="zh">2. 理论框架</span>
+                            <span data-lang="en">2. Theoretical Framework</span>
+                        </a></li>
+                        <li><a href="#dimensions">
+                            <span data-lang="zh">3. 维度构建</span>
+                            <span data-lang="en">3. Dimensional Construction</span>
+                        </a></li>
+                        <li><a href="#scoring">
+                            <span data-lang="zh">4. 评分机制</span>
+                            <span data-lang="en">4. Scoring System</span>
+                        </a></li>
+                        <li><a href="#limitations">
+                            <span data-lang="zh">5. 系统局限性</span>
+                            <span data-lang="en">5. Limitations</span>
+                        </a></li>
+                        <li><a href="#improvements">
+                            <span data-lang="zh">6. 后续优化</span>
+                            <span data-lang="en">6. Future Improvements</span>
+                        </a></li>
+                        <li><a href="#references">
+                            <span data-lang="zh">7. 参考文献</span>
+                            <span data-lang="en">7. References</span>
+                        </a></li>
+                    </ul>
+                </div>
+            </div>
+            
+            <!-- 右侧内容 -->
+            <div class="report-content">
+                <!-- 更新日志部分 -->
+                <div id="updates" class="changelog-card">
+                    <h2 class="changelog-title">
+                        <i class="ri-tools-line"></i>
+                        <span data-lang="zh">更新日志</span>
+                        <span data-lang="en">Updates Log</span>
+                    </h2>
+                    <span class="changelog-date">2025.4.16</span>
+                    
+                    <ul class="changelog-list">
+                        <li data-lang="zh">差不多可以上线了！</li>
+                        <li data-lang="en">Almost ready to launch!</li>
+                    </ul>
+                    
+                    <ul class="changelog-list">    
+                        <li data-lang="zh">架构了report页面；</li>
+                        <li data-lang="en">Built the report page structure;</li>
+                    </ul>
+                    
+                    <ul class="changelog-list">
+                        <li data-lang="zh">调整打分算法为线性加权模型，并将"中间摇摆区间"从原来的[50–64]收紧为[45–54]，尽量让测试有区分性和倾向性；</li>
+                        <li data-lang="en">Adjusted the scoring algorithm to a linear weighted model, and tightened the "middle/undecided zone" from [50-64] to [45-54], making the test more decisive;</li>
+                    </ul>
+                    
+                    <ul class="changelog-list">
+                        <li data-lang="zh">替换了题目：第 18 题（D3）：原"我的手机和电脑的语言设定，基本都是目标国语言。" 更新为："我在目标国已经有一些让我感到被接纳的圈子。（包括同在异乡的朋友）" 更明确地测试了个体在目标国的融入感；原语言设置感觉有点抽象并不够具体到能够反映该维度对应的特质</li>
+                        <li data-lang="en">Replaced question 18 (D3): Changed from "My phone and computer are mostly set to the local language" to "I have some circles in the target country where I feel accepted (including friends who are also abroad)" - This more clearly tests the individual's sense of integration; the original language setting felt too abstract</li>
+                    </ul>
+                    
+                    <ul class="changelog-list">
+                        <li data-lang="zh">第 22 题（D4）：原 "我对'为祖国或家庭做出贡献'有一种天然的责任感。" 更新为："我的家庭不会强制替我做出人生选择。" 切入了更具体更贴近"家庭"-"决策"这个逻辑链的视角</li>
+                        <li data-lang="en">Question 22 (D4): Changed from "I feel a natural sense of duty to contribute to my family or home country" to "My family doesn't force life decisions on me" - This approaches the "family"-"decision" logical chain more directly</li>
+                    </ul>
+                    
+                    <ul class="changelog-list">
+                        <li data-lang="zh">第 29 题（D5）：原"回国或留下的选择，可以完全靠我独立决定，别人（如家人）不能替我决定。" 更新为："我对留或回没有特别强的倾向，可能会同时在国内和国外寻找机会。" 添加了更明确的反向题，用于测试个体对于清晰目标的规划</li>
+                        <li data-lang="en">Question 29 (D5): Changed from "Whether I stay or return is entirely my own decision, others (like my family) can't decide for me" to "I don't have a strong preference about staying or returning; I might look for opportunities both at home and abroad" - Added a clearer reverse-scored question to test for clear goal planning</li>
+                    </ul>
+                </div>
+                
+                <!-- 后续更新方向 -->
+                <div id="future-updates" class="changelog-card">
+                    <h2 class="changelog-title">
+                        <i class="ri-roadmap-line"></i>
+                        <span data-lang="zh">后续更新方向</span>
+                        <span data-lang="en">Future Updates</span>
+                    </h2>
+                    
+                    <ul class="changelog-list">
+                        <li data-lang="zh">补全双语的report【现在英文版为机翻占位orz】</li>
+                        <li data-lang="en">Complete the bilingual report [English version currently using machine translation as placeholder orz]</li>
+                    </ul>
+                    
+                    <ul class="changelog-list">
+                        <li data-lang="zh">持续打磨结果页面的中英文本</li>
+                        <li data-lang="en">Continuously refine the Chinese and English text on the results page</li>
+                    </ul>
+                    
+                    <ul class="changelog-list">
+                        <li data-lang="zh">继续收集匿名的测试结果以动态调整更科学的算法，基于样本行为微调区间分布模型</li>
+                        <li data-lang="en">Continue collecting anonymous test results to dynamically adjust algorithms for greater scientific accuracy, fine-tuning the interval distribution model based on sample behavior</li>
+                    </ul>
+                </div>
+                
+                <!-- 研究报告部分 -->
+                <div id="introduction" class="research-card">
+                    <h2 class="section-title">
+                        <span data-lang="zh">1. 简介</span>
+                        <span data-lang="en">1. Introduction</span>
+                    </h2>
+                    <p class="research-text" data-lang="zh">
+                        在全球高等教育体系不断扩展、国际人才流动愈发频繁的背景下，留学生群体所面临的去留决策正变得愈加复杂。随着签证与移民政策的收紧、国内外就业环境的快速变动，以及个体身份认同、文化归属感的动态演化，这一问题不再只是"留还是回"这样简单的二元选择，而是一个牵涉现实资源配置、跨文化适应、家庭路径规划与个人动机整合的多维判断过程。越来越多的留学生，包括我自己在内，都会在学业中后期、身份转换前后，经历不同程度的摇摆、犹疑，可能带来持续的心理压力，或陷入长期的延迟选择状态。
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        As global higher education systems continuously expand and international talent mobility becomes increasingly frequent, the stay-or-return decision faced by international students is growing more complex. With tightening visa and immigration policies, rapidly changing employment environments both domestically and internationally, and the dynamic evolution of individual identity and cultural belonging, this issue is no longer a simple binary choice of "stay or return." Instead, it has become a multi-dimensional judgment process involving practical resource allocation, cross-cultural adaptation, family path planning, and personal motivation integration. More and more international students, including myself, experience varying degrees of vacillation and hesitation during the later stages of academic studies or during identity transitions, which may lead to sustained psychological pressure or a prolonged state of delayed decision-making.
+                    </p>
+                    <p class="research-text" data-lang="zh">
+                        本测评系统正是在此背景下设计，希望能够帮助用户以结构化、系统性的方式理解自身在"留 or 回"议题中的心理结构。测试的设计聚焦在五个关键维度，结合理论支持与实际决策场景，为用户提供非线性、非标签化的倾向性反馈，避免将结果简化为单一推荐或价值判断。
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        This assessment system was designed against this background, aiming to help users understand their psychological structure regarding the "stay or return" issue in a structured and systematic way. The test design focuses on five key dimensions, combining theoretical support with practical decision-making scenarios, to provide users with non-linear, non-labeled tendency feedback, avoiding simplifying results into single recommendations or value judgments.
+                    </p>
+                    <p class="research-text" data-lang="zh">
+                        需要特别说明的是，本测评依旧有一定的局限性，仅作为自我探索和反思引导的工具使用，不具备行为预测能力，不应被视为替代职业咨询、法律建议或移民决策的依据。其本质更接近一种具备理论支持的探索型娱乐问卷，为用户提供一个更清晰的内在参照，而非输出标准化的决策答案。
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        It is important to note that this assessment still has certain limitations and should only be used as a tool for self-exploration and reflective guidance. It does not have behavioral predictive capabilities and should not be viewed as a substitute for career counseling, legal advice, or immigration decision-making. Its essence is closer to an exploratory entertainment questionnaire with theoretical support, providing users with a clearer internal reference rather than outputting standardized decision answers.
+                    </p>
+                </div>
+                
+                <div id="framework" class="research-card">
+                    <h2 class="section-title">
+                        <span data-lang="zh">2. 理论框架</span>
+                        <span data-lang="en">2. Theoretical Framework</span>
+                    </h2>
+                    <p class="research-text" data-lang="zh">
+                        本研究的理论基础主要来源于以下几个领域：
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        The theoretical foundation of this research primarily derives from the following areas:
+                    </p>
+                    
+                    <h3 class="subsection-title">
+                        <span data-lang="zh">2.1 SCCT (社会认知职业理论)</span>
+                        <span data-lang="en">2.1 SCCT (Social Cognitive Career Theory)</span>
+                    </h3>
+                    <p class="research-text" data-lang="zh">
+                        社会认知职业理论（SCCT）由 Lent、Brown 和 Hackett（1994）提出，强调职业兴趣、选择与表现受三大心理机制影响：自我效能感（self-efficacy）、结果预期（outcome expectations）、目标行为（goal setting）。该理论认为个体的职业发展受限于自身资源、环境支持、以及对障碍的应对策略之间的互动关系。
+                        在后续的扩展模型中（Lent & Brown, 2006; Lent & Brown, 2013），SCCT进一步将适应力、满意度、自我调节纳入框架，用以解释在跨文化背景下，个体如何对机会与限制做出认知评估并采取行动。本测评正是以 SCCT 为基本结构，设计了五个维度来探讨个体在"留 or 回"决策中展现的行为倾向与心理机制。
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        Social Cognitive Career Theory (SCCT), proposed by Lent, Brown, and Hackett (1994), emphasizes that career interests, choices, and performance are influenced by three major psychological mechanisms: self-efficacy, outcome expectations, and goal setting. This theory suggests that an individual's career development is constrained by the interactive relationship between personal resources, environmental support, and strategies for addressing obstacles.
+                        In subsequent expanded models (Lent & Brown, 2006; Lent & Brown, 2013), SCCT further incorporated adaptability, satisfaction, and self-regulation into the framework to explain how individuals make cognitive assessments of opportunities and limitations and take action in cross-cultural contexts. This assessment is based on SCCT as its fundamental structure, designing five dimensions to explore the behavioral tendencies and psychological mechanisms individuals display in "stay or return" decisions.
+                    </p>
+                    
+                    <h3 class="subsection-title">
+                        <span data-lang="zh">2.2 推拉模型 (Push-Pull Model)</span>
+                        <span data-lang="en">2.2 Push-Pull Model</span>
+                    </h3>
+                    <p class="research-text" data-lang="zh">
+                        推拉模型最早应用于国际学生迁移研究，强调目标国家的吸引因素（拉力）与原属地的排斥因素（推力）共同影响个体的迁移决策（Mazzarol & Soutar, 2002）。
+                        本测评对该理论的应用，主要在"现实吸引力判断"维度整合了该模型的双向视角，鼓励用户不仅评估留在海外的"好处"，也对可能的社会结构障碍进行认知判断，从而避免单边化决策。
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        The Push-Pull Model was first applied to international student migration research, emphasizing that the attractive factors of the target country (pull forces) and the repulsive factors of the place of origin (push forces) jointly influence an individual's migration decisions (Mazzarol & Soutar, 2002).
+                        The application of this theory in our assessment primarily integrates the bidirectional perspective of this model in the "Reality-Based Attractiveness" dimension, encouraging users to not only evaluate the "benefits" of staying overseas but also make cognitive judgments about possible social structural barriers, thereby avoiding one-sided decisions.
+                    </p>
+                    
+                    <h3 class="subsection-title">
+                        <span data-lang="zh">2.3 文化适应理论 (Cultural Adaptation Theory)</span>
+                        <span data-lang="en">2.3 Cultural Adaptation Theory</span>
+                    </h3>
+                    <p class="research-text" data-lang="zh">
+                        Berry（1997）提出跨文化适应包含心理适应（emotional well-being）与社会文化适应（behavioral competence）两个维度，强调个体在跨文化迁移中的应对方式与归属策略。近年来的研究进一步指出，个体对目标国文化的态度、归属时刻与身份边界知觉，是影响其留/回判断的重要心理变量（Geeraert et al., 2022）。
+                        本测评中的"心理归属与认同"维度，正是从文化适应路径切入，关注个体是否能在海外生活中建立起某种意义上的社会归属与文化共鸣。
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        Berry (1997) proposed that cross-cultural adaptation includes two dimensions: psychological adaptation (emotional well-being) and sociocultural adaptation (behavioral competence), emphasizing an individual's coping methods and belonging strategies in cross-cultural migration. Recent research further indicates that an individual's attitude toward the target country's culture, moments of belonging, and perception of identity boundaries are important psychological variables affecting their stay/return judgment (Geeraert et al., 2022).
+                        The "Psychological Belonging" dimension in this assessment approaches from the cultural adaptation pathway, focusing on whether individuals can establish social belonging and cultural resonance in overseas life in some sense.
+                    </p>
+                    
+                    <h3 class="subsection-title">
+                        <span data-lang="zh">2.4 留学生三因素模型 (Three-Factor Model for International Students)</span>
+                        <span data-lang="en">2.4 Three-Factor Model for International Students</span>
+                    </h3>
+                    <p class="research-text" data-lang="zh">
+                        Wu（2020）在对中国留学生的质性研究中提出，个体的留/回判断通常建立在三类核心变量上：家庭支持程度、社会资源嵌入情况与个人成长路径延续。这一模型强调，留学生在做出迁移判断时，并非只考虑经济效益或文化适应，而是要在心理层面权衡"我是谁、我属于谁、我要成为什么"。
+                        本测评的"成长路径与家庭匹配"维度应用了此模型的理论，关注到了家庭文化期望与个体成长线索之间是否存在张力，以及这种张力在"留or回"决策中的权重。
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        In a qualitative study of Chinese international students, Wu (2020) proposed that an individual's stay/return judgment is typically based on three core variables: level of family support, social resource embeddedness, and continuity of personal growth paths. This model emphasizes that when making migration judgments, international students consider not only economic benefits or cultural adaptation but also weigh "who I am, whom I belong to, and what I want to become" on a psychological level.
+                        The "Family Compatibility & Growth Path" dimension of this assessment applies the theory of this model, focusing on whether there is tension between family cultural expectations and individual growth clues, and the weight of this tension in "stay or return" decisions.
+                    </p>
+                </div>
+                
+                <div id="dimensions" class="research-card">
+                    <h2 class="section-title">
+                        <span data-lang="zh">3. 维度构建</span>
+                        <span data-lang="en">3. Dimensional Construction</span>
+                    </h2>
+                    <p class="research-text" data-lang="zh">
+                        本测评共设置30道题目，参考以上五个理论模型，将"留or回"的决策考虑划分为五个维度，每个维度包括六道题，其中一题为反向题，用于校正应答偏差。所有题目采用 Likert 五级评分（1 = 非常不同意，5 = 非常同意），测量结果不单体现态度方向，也反映个体在该维度下的结构状态与心理取向。
+                        五个维度的划分依据理论来源与目标场景的匹配度进行设定，具体如下：
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        This assessment contains 30 questions, referencing the five theoretical models above, dividing the "stay or return" decision considerations into five dimensions, with six questions per dimension, including one reverse-scored question to correct response bias. All questions use a Likert five-point scale (1 = strongly disagree, 5 = strongly agree), with measurement results reflecting not only attitude direction but also structural state and psychological orientation of the individual in that dimension.
+                        The division of the five dimensions is based on the match between theoretical sources and target scenarios, specifically as follows:
+                    </p>
+                    
+                    <h3 class="subsection-title">
+                        <span data-lang="zh">3.1 现实吸引力（D1）</span>
+                        <span data-lang="en">3.1 Reality-Based Attractiveness (D1)</span>
+                    </h3>
+                    <p class="research-text" data-lang="zh">
+                        本维度可以测试到个体如何评估海外与国内在现实条件上的差异，涵盖对制度环境、发展通道、经济机会、社会支持等方面的主观判断，主要可以从结论中反映出个体在做出去留决定时，是否认为自己能够在当前所处国家中获得相对更具吸引力的现实资源。其理论基础主要来自 SCCT 的结果预期模块（Lent et al., 1994）以及推拉模型（Mazzarol & Soutar, 2002）中关于"拉力"与"推力"的概念。
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        This dimension can test how individuals evaluate the differences between overseas and domestic environments in real conditions, covering subjective judgments on institutional environments, development channels, economic opportunities, social support, etc. It mainly reflects whether individuals believe they can obtain relatively more attractive practical resources in their current country when making stay-or-return decisions. Its theoretical basis mainly comes from the outcome expectation module of SCCT (Lent et al., 1994) and the concepts of "pull" and "push" factors in the Push-Pull Model (Mazzarol & Soutar, 2002).
+                    </p>
+                    
+                    <h3 class="subsection-title">
+                        <span data-lang="zh">3.2 自我适配能力（D2）</span>
+                        <span data-lang="en">3.2 Self Adaptability (D2)</span>
+                    </h3>
+                    <p class="research-text" data-lang="zh">
+                        该维度用于评估个体在跨文化环境中的应对与调节能力，比如对当地的语言、生活节奏、任务管理、社交策略等方面的适应情况。简而言之，这部分衡量的是主要是在环境当中的适应能力，可以理解为行为层面的操作力。
+                        题目设计参考了 SCCT 中关于自我效能感的研究（Lent & Brown, 2006），同时借鉴了文化适应研究中对行为适应性的关注（Berry, 1997）。
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        This dimension is used to evaluate an individual's coping and adjustment abilities in a cross-cultural environment, such as adaptation to local language, life rhythm, task management, social strategies, etc. In short, this part mainly measures adaptability within the environment, which can be understood as operational capability at the behavioral level.
+                        The question design references research on self-efficacy in SCCT (Lent & Brown, 2006), while also drawing on the focus on behavioral adaptability in cultural adaptation research (Berry, 1997).
+                    </p>
+                    
+                    <h3 class="subsection-title">
+                        <span data-lang="zh">3.3 心理归属与认同（D3）</span>
+                        <span data-lang="en">3.3 Psychological Belonging (D3)</span>
+                    </h3>
+                    <p class="research-text" data-lang="zh">
+                        本维度主要用于测试个体在情感上是否与目标国建立了链接，但不要求个体认同所有文化差异，主要讨论能否个体能否在异国他乡拥有表达自由，能够被看见，有"融入当地"的心理体验。
+                        此部分建立在 Berry 的心理适应框架基础上（1997），并结合 Wu（2020）提出的"社会嵌入"作为归属的重要参照。
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        This dimension is mainly used to test whether individuals have established emotional connections with the target country, though it does not require individuals to identify with all cultural differences. It primarily discusses whether individuals can have freedom of expression, be seen, and have a psychological experience of "being integrated locally" in a foreign country.
+                        This part is built on Berry's psychological adaptation framework (1997) and combines the "social embedding" proposed by Wu (2020) as an important reference for belonging.
+                    </p>
+                    
+                    <h3 class="subsection-title">
+                        <span data-lang="zh">3.4 成长路径与家庭匹配（D4）</span>
+                        <span data-lang="en">3.4 Family Compatibility & Growth Path (D4)</span>
+                    </h3>
+                    <p class="research-text" data-lang="zh">
+                        该维度反映个体在成长过程中形成的发展线索是否与家庭的文化期待和社会角色分配保持一致，或存在张力。简而言之，是在问："我现在走的这条路，是不是和家人期望的不冲突？"题项涉及家庭支持感、情感负担、自主空间与"子女角色"的文化定义。
+                        理论来源为留学生三因子模型中的"家庭"和"成长路径"变量（Wu, 2020），亦与 SCCT 所强调的情境变量调节路径相呼应。
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        This dimension reflects whether the developmental cues formed during an individual's growth process align with the family's cultural expectations and social role allocation, or if there is tension. Simply put, it asks: "Is the path I'm currently walking not in conflict with what my family expects?" Items involve family support, emotional burden, autonomy, and the cultural definition of the "child role."
+                        The theoretical source is the "family" and "growth path" variables in the Three-Factor Model for International Students (Wu, 2020), which also echoes the contextual variable regulation path emphasized by SCCT.
+                    </p>
+                    
+                    <h3 class="subsection-title">
+                        <span data-lang="zh">3.5 动机与目标意识（D5）</span>
+                        <span data-lang="en">3.5 Goal-Driven Motivation (D5)</span>
+                    </h3>
+                    <p class="research-text" data-lang="zh">
+                        本维度关注个体在去留问题上的动机明确度、自主选择能力与路径意识，主要用来评估个体是否具备主动思考、设定目标和规划路径的倾向，这些可以作为能否留在国外的重要参考指标。
+                        题目设计结合了 SCCT 中的目标设定理论（Lent & Brown, 2013）与海外移民研究中常提及的"逃避型"和"积极型"迁移动机的差异（Savugathali et al., 2025）。
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        This dimension focuses on an individual's clarity of motivation, autonomous choice ability, and path awareness regarding the stay-or-return issue. It is mainly used to assess whether individuals have the tendency to think actively, set goals, and plan paths, which can serve as important reference indicators for whether they can stay abroad.
+                        The question design combines the goal-setting theory in SCCT (Lent & Brown, 2013) with the differences between "avoidance" and "active" migration motivations often mentioned in overseas immigration studies (Savugathali et al., 2025).
+                    </p>
+                </div>
+                
+                <div id="scoring" class="research-card">
+                    <h2 class="section-title">
+                        <span data-lang="zh">4. 评分机制</span>
+                        <span data-lang="en">4. Scoring System</span>
+                    </h2>
+                    <p class="research-text" data-lang="zh">
+                        Still working on it...
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        Still working on it...
+                    </p>
+                </div>
+                
+                <div id="limitations" class="research-card">
+                    <h2 class="section-title">
+                        <span data-lang="zh">5. 系统局限性</span>
+                        <span data-lang="en">5. Limitations</span>
+                    </h2>
+                    <p class="research-text" data-lang="zh">
+                        Still working on it...
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        Still working on it...
+                    </p>
+                </div>
+                
+                <div id="improvements" class="research-card">
+                    <h2 class="section-title">
+                        <span data-lang="zh">6. 后续优化</span>
+                        <span data-lang="en">6. Future Improvements</span>
+                    </h2>
+                    <p class="research-text" data-lang="zh">
+                        Still working on it...
+                    </p>
+                    <p class="research-text" data-lang="en">
+                        Still working on it...
+                    </p>
+                </div>
+                
+                <div id="references" class="research-card">
+                    <h2 class="section-title">
+                        <span data-lang="zh">7. 参考文献</span>
+                        <span data-lang="en">7. References</span>
+                    </h2>
+                    <ul class="references-list">
+                        <li>Berry, J. W. (1997). Immigration, acculturation, and adaptation. <em>Applied Psychology: An International Review, 46</em>(1), 5-34.</li>
+                        <li>Bowen, M. (1978). <em>Family therapy in clinical practice</em>. New York: Jason Aronson.</li>
+                        <li>Kim, Y. Y. (2001). <em>Becoming intercultural: An integrative theory of communication and cross-cultural adaptation</em>. Thousand Oaks, CA: Sage.</li>
+                        <li>Schein, E. H. (1996). Career anchors revisited: Implications for career development in the 21st century. <em>Academy of Management Executive, 10</em>(4), 80-88.</li>
+                        <li>Super, D. E. (1980). A life-span, life-space approach to career development. <em>Journal of Vocational Behavior, 16</em>(3), 282-298.</li>
+                        <li>Tajfel, H., & Turner, J. C. (1986). The social identity theory of intergroup behavior. In S. Worchel & W. G. Austin (Eds.), <em>Psychology of intergroup relations</em> (pp. 7-24). Chicago: Nelson-Hall.</li>
+                        <li>Ward, C., & Kennedy, A. (1999). The measurement of sociocultural adaptation. <em>International Journal of Intercultural Relations, 23</em>(4), 659-677.</li>
+                        <li>Mendenhall, M., & Oddou, G. (1985). The dimensions of expatriate acculturation: A review. <em>Academy of Management Review, 10</em>(1), 39-47.</li>
+                        <li>Searle, W., & Ward, C. (1990). The prediction of psychological and sociocultural adjustment during cross-cultural transitions. <em>International Journal of Intercultural Relations, 14</em>(4), 449-464.</li>
+                        <li>Phinney, J. S., & Ong, A. D. (2007). Conceptualization and measurement of ethnic identity: Current status and future directions. <em>Journal of Counseling Psychology, 54</em>(3), 271-281.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    
     <script>
     document.addEventListener('DOMContentLoaded', function() {
-        const savedLanguage = localStorage.getItem('quizLanguage');
-        if (savedLanguage) {
-            currentLang = savedLanguage;
-            if (currentLang === 'en') {
-                document.body.classList.add('lang-en');
-            }
-            updatePageLanguage();
+        // 确保全局变量正确定义
+        window.currentLang = localStorage.getItem('quizLanguage') || 'zh';
+        
+        // 如果是英文，添加英文类
+        if (window.currentLang === 'en') {
+            document.body.classList.add('lang-en');
         }
+        
+        // 立即更新页面语言
+        updatePageLanguage();
+        
+        // 滚动导航激活状态
+        const sections = document.querySelectorAll('.research-card, .changelog-card');
+        const navLinks = document.querySelectorAll('.report-nav-list a');
+        
+        window.addEventListener('scroll', () => {
+            let current = '';
+            
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                const sectionHeight = section.clientHeight;
+                if (pageYOffset >= sectionTop - 200) {
+                    current = section.getAttribute('id');
+                }
+            });
+            
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').substring(1) === current) {
+                    link.classList.add('active');
+                }
+            });
+        });
     });
+    
+    // 切换语言函数 - 直接内联在HTML中定义
+    function toggleLanguage() {
+        console.log('Toggle language called');
+        if (!window.currentLang) {
+            window.currentLang = 'zh';
+        }
+        
+        window.currentLang = window.currentLang === 'zh' ? 'en' : 'zh';
+        console.log('New language:', window.currentLang);
+        
+        localStorage.setItem('quizLanguage', window.currentLang);
+        
+        if (window.currentLang === 'en') {
+            document.body.classList.add('lang-en');
+        } else {
+            document.body.classList.remove('lang-en');
+        }
+        
+        updatePageLanguage();
+    }
+    
+    // 更新页面语言函数
+    function updatePageLanguage() {
+        console.log('Updating page language to:', window.currentLang);
+        const elements = document.querySelectorAll('[data-lang]');
+        elements.forEach(el => {
+            if (el.getAttribute('data-lang') === window.currentLang) {
+                el.style.display = '';
+            } else {
+                el.style.display = 'none';
+            }
+        });
+    }
     </script>
 </body>
 </html> 

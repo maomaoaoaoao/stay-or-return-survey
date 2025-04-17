@@ -128,15 +128,15 @@ const quizQuestions = [
     },
     {
         id: 17,
-        text: "在国外生活时，我喜欢参加只有本地人参加的聚会或活动，不会觉得不自在。",
-        text_en: "I enjoy attending local-only events or parties and don't feel out of place.",
+        text: "在国外生活时，我会参加只有本地人参加的聚会或活动，不会觉得不自在。",
+        text_en: "I attend local-only events or parties and don't feel out of place.",
         dimension: "D3",
         isReverse: false
     },
     {
         id: 18,
-        text: "我的手机和电脑的语言设定，基本都是目标国语言。",
-        text_en: "My phone and computer are mostly set to the local language.",
+        text: "我在目标国已经有一些让我感到被接纳的圈子。（包括同在异乡的朋友）",
+        text_en: "I have a few circles in the target country that make me feel accepted. (Including friends who are also abroad.)",
         dimension: "D3",
         isReverse: false
     },
@@ -165,8 +165,8 @@ const quizQuestions = [
     },
     {
         id: 22,
-        text: "我对\"为祖国或家庭做出贡献\"有一种天然的责任感。",
-        text_en: "I feel a natural sense of duty to contribute to my family or home country.",
+        text: "我的家庭不会强制替我做出人生选择。",
+        text_en: "My family doesn’t force decisions on me.",
         dimension: "D4",
         isReverse: false
     },
@@ -195,8 +195,8 @@ const quizQuestions = [
     },
     {
         id: 26,
-        text: "对我来说，留在国外不是一个\"顺其自然\"的选择，而是深思熟虑后的决定。",
-        text_en: "Staying abroad is not something I take lightly, it's a decision I've thought through carefully.",
+        text: "为了留在这里，我可以接受为解决身份问题而付出大量努力。",
+        text_en: "I am willing to go through the effort of resolving legal status issues if it means I can stay.",
         dimension: "D5",
         isReverse: false
     },
@@ -216,10 +216,10 @@ const quizQuestions = [
     },
     {
         id: 29,
-        text: "回国或留下的选择，可以完全靠我独立决定，别人（如家人）不能替我决定。",
-        text_en: "Whether I stay or return is entirely my own decision, others (like my family) can't decide for me.",
+        text: "我对留或回没有特别强的倾向，可能会同时在国内和国外寻找机会。",
+        text_en: "I don’t have a strong preference for staying or returning; I might explore opportunities both at home and abroad.",
         dimension: "D5",
-        isReverse: false
+        isReverse: true
     },
     {
         id: 30,
@@ -267,9 +267,9 @@ const dimensionNames = {
 };
 
 const dimensionNames_en = {
-    "D1": "Economic Attractiveness",
+    "D1": "Reality-Based Attractiveness",
     "D2": "Self-Adaptability",
-    "D3": "Emotional Fulfillment & Belonging",
+    "D3": "Psychological Belonging",
     "D4": "Family Compatibility & Growth Path",
     "D5": "Motivation & Goal Orientation"
 };
@@ -331,7 +331,7 @@ const dimensionExplanations = {
 // 英文版维度解释
 const dimensionExplanationsEN = {
     D1: {
-        title: "Economic Attractiveness (Financial and Living Conditions Abroad)",
+        title: "Reality-Based Attractiveness (Financial and Living Conditions Abroad)",
         levels: [
             { range: [77, 100], text: "You strongly resonate with the practical side of life abroad\nYou're already familiar with the pace, structure, and opportunities available, and you know how to access resources and growth paths overseas. Your answers reflect grounded judgment—this isn't just a whimsical decision. You may also feel that certain aspects of domestic life no longer align with you. Overall, you're likely to thrive and even achieve financial stability abroad." },
             { range: [55, 76], text: "Living abroad can offer meaningful support for you\nYou recognize some strengths of overseas life, even if you haven't fully confirmed whether you can settle long-term. You may still be open to returning home, but your thinking is practical and reality-based. You're trying to build a life that is supported by structure and resources, not just idealism." },
@@ -351,7 +351,7 @@ const dimensionExplanationsEN = {
         ]
     },
     D3: {
-        title: "Emotional Fulfillment & Belonging (Emotional Stability and Sense of Belonging Abroad)",
+        title: "Psychological Belonging (Emotional Stability and Sense of Belonging Abroad)",
         levels: [
             { range: [77, 100], text: "You feel truly at ease abroad and have found emotional grounding\nBased on your responses, you've gradually adapted to the rhythm of life abroad and have found a sense of belonging similar to being at home. You can synchronize with the local culture, maintain self-expression, and perhaps have met people who understand you, all of which provide emotional security. You've established your own rhythm and connection methods, and this stability indicates a strong ability to root yourself internally—external environment is no longer an obstacle." },
             { range: [55, 76], text: "You're mostly comfortable, but still observing\nYou can generally maintain emotional stability and have found some suitable circles or rhythms, but sometimes you're still not entirely sure if you belong here. You may still be processing some cultural differences and need to find your balance point. This is quite normal! Overall, you haven't completely failed to adapt, but you may need ongoing adjustments to find that truly 'home-like' state." },
