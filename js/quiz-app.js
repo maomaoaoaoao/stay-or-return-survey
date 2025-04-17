@@ -460,19 +460,20 @@ document.addEventListener('DOMContentLoaded', function() {
      * 计算最终加权得分
      */
     function calculateFinalScore(dimensionStandardizedScores) {
-        // 基本线性加权计算
-        const weightedScore = 
-            dimensionWeights.D1 * dimensionStandardizedScores.D1 +
-            dimensionWeights.D2 * dimensionStandardizedScores.D2 +
-            dimensionWeights.D3 * dimensionStandardizedScores.D3 +
-            dimensionWeights.D4 * dimensionStandardizedScores.D4 +
-            dimensionWeights.D5 * dimensionStandardizedScores.D5;
+        // 计算五个维度的平均分数作为总分，不再使用权重
+        const averageScore = (
+            dimensionStandardizedScores.D1 +
+            dimensionStandardizedScores.D2 +
+            dimensionStandardizedScores.D3 +
+            dimensionStandardizedScores.D4 +
+            dimensionStandardizedScores.D5
+        ) / 5;
         
         // 记录分数计算过程，便于调试
         console.log('维度分数:', dimensionStandardizedScores);
-        console.log('最终加权得分:', weightedScore);
+        console.log('最终平均得分:', averageScore);
         
-        return weightedScore;
+        return averageScore;
     }
     
     /**
