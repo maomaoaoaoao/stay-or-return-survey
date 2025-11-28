@@ -12,8 +12,8 @@ const quizQuestions = [
     // D1 现实吸引力判断 (6题)
     {
         id: 1,
-        text: "我对比过国内外的生活条件，认为在海外更有可能获得较高收入和发展机会。",
-        text_en: "I've compared living conditions at home and abroad, and I believe I'm more likely to earn a higher income and find development opportunities overseas.",
+        text: "我对比过国内外的生活条件，觉得在不同环境下可能会获得不同类型的收入与发展机会，而目前我认为海外与我的发展方向更匹配。",
+        text_en: "I've compared living conditions in different environments and feel each offers different types of opportunities. At this stage, I think the overseas environment aligns better with my development goals.",
         dimension: "D1",
         isReverse: false
     },
@@ -26,8 +26,8 @@ const quizQuestions = [
     },
     {
         id: 3,
-        text: "我认为国外能提供更多高质量的教育资源，有利于我提升长期竞争力。",
-        text_en: "I believe there are more high-quality education and professional training resources overseas that can enhance my long-term competitiveness.",
+        text: "我认为海外提供的教育与培训方式与我当下的需求更契合，有助于我提升长期竞争力。",
+        text_en: "I believe the educational and training approaches overseas align better with my current needs and help strengthen my long-term competitiveness.",
         dimension: "D1",
         isReverse: false
     },
@@ -209,8 +209,8 @@ const quizQuestions = [
     },
     {
         id: 28,
-        text: "当初选择出国，主要是因为我想逃离某种让我感到压力很大的环境。",
-        text_en: "One of my main reasons for going abroad was to escape an environment that made me feel overwhelmed.",
+        text: "当初选择出国，是因为我希望暂时离开让我感到负担较大的环境，去尝试一种新的生活方式。",
+        text_en: "When I chose to go abroad, it was because I wanted to step away from an environment that felt overwhelming and explore a different way of living.",
         dimension: "D5",
         isReverse: false
     },
